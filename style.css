@@ -1,0 +1,394 @@
+* {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #fafafa;
+    color: #000;
+}
+
+h1 {
+    color: #000;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 16px;
+}
+
+/* Header Styling */
+.header-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #dbdbdb;
+    background: #fff;
+    gap: 8px;
+}
+
+.header-logo img {
+    width: 40px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.header-motto {
+    text-align: center;
+    padding: 12px;
+    font-size: 14px;
+    color: #737373;
+}
+
+/* Form Elements */
+.log-box {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 30px 16px;
+}
+
+input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #dbdbdb;
+    font-size: 14px;
+    background: #fafafa;
+    color: #000;
+    transition: all 0.2s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #a8a8a8;
+    background: #fff;
+}
+
+*::placeholder {
+    color: #a0a0a0;
+    font-size: 14px;
+}
+
+/* Box Styling */
+.field-box {
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+}
+
+.Account-field-box {
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+}
+
+/* Button Styling */
+button {
+    font-family: inherit;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+#Login-Button, #Find-Button, #Reset-Button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    background-color: #0095f6;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#Login-Button:hover, #Find-Button:hover, #Reset-Button:hover {
+    background-color: #1877f2;
+}
+
+#Login-Button:disabled {
+    background-color: #b3d9ff;
+    cursor: not-allowed;
+}
+
+hr {
+    margin: 20px 16px;
+    border: none;
+    border-top: 1px solid #dbdbdb;
+}
+
+.sign-box {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    padding: 20px 16px;
+}
+
+#Sign-Button {
+    border-radius: 6px;
+    background-color: #004875;
+    color: #fff;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#Sign-Button:hover {
+    background-color: #053131;
+}
+
+/* Link Styling */
+a {
+    text-decoration: none;
+    color: #0095f6;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #1877f2;
+}
+
+/* Footer */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 20px 16px;
+    margin-top: 40px;
+    font-size: 12px;
+}
+
+.footer-links a {
+    color: #737373;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.footer-copy {
+    text-align: center;
+    padding: 12px;
+    font-size: 12px;
+    color: #737373;
+}
+
+footer {
+    background-color: #fff;
+    border-top: 1px solid #dbdbdb;
+    padding: 20px 0;
+    margin-top: 50px;
+}
+
+.Forget_password {
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+}
+
+/* Accounts Page */
+.accounts-header {
+    background: #fff;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 20px;
+    text-align: center;
+}
+
+.accounts-header h1 {
+    margin-bottom: 12px;
+}
+
+#logoutAll {
+    background: #ed4956;
+    color: #fff;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+#logoutAll:hover {
+    background: #d63447;
+}
+
+#accountsList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.account-card {
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+.account-card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.account-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 12px;
+    border: 2px solid #f0f0f0;
+}
+
+.account-card div:nth-child(2) {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    word-break: break-word;
+}
+
+.account-card button {
+    background: #0095f6;
+    color: white;
+    border: none;
+    padding: 8px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.account-card button:hover {
+    background: #1877f2;
+}
+
+/* Profile Page */
+#profileContainer {
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+#profileContainer img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f0f0f0;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+#profileContainer h2 {
+    margin: 0 0 20px 0;
+}
+
+#profileContainer input[type="file"] {
+    display: block;
+    margin: 16px auto;
+    cursor: pointer;
+    padding: 8px;
+}
+
+#profileContainer input[type="text"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 12px;
+    margin: 12px 0;
+    border: 1px solid #dbdbdb;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+#profileContainer button {
+    background: #0095f6;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 8px 4px;
+}
+
+#profileContainer button:hover {
+    background: #1877f2;
+}
+
+#profileContainer button:last-child {
+    background: #dbdbdb;
+    color: #000;
+}
+
+#profileContainer button:last-child:hover {
+    background: #c3c3c3;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .field-box, .Account-field-box, .Forget_password {
+        margin-top: 20px;
+        border-radius: 0;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    #accountsList {
+        grid-template-columns: 1fr;
+        padding: 12px;
+    }
+
+    #profileContainer {
+        margin: 20px 12px;
+        padding: 20px;
+    }
+
+    .footer-links {
+        gap: 8px;
+    }
+}
