@@ -49,12 +49,12 @@ Replace the `firebaseConfig` object in `database.js` with your copied configurat
 
 ```javascript
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "your-project.firebaseapp.com",
-    projectId: "your-project-id",
-    storageBucket: "your-project.appspot.com",
-    messagingSenderId: "your-messaging-sender-id",
-    appId: "your-app-id"
+    apiKey: "AIzaSyCWX4AxKBPYhXzOxN68nFkqKVMq2x-MAGk",
+    authDomain: "pictorgram-eb06a.firebaseapp.com",
+    projectId: "pictorgram-eb06a",
+    storageBucket: "pictorgram-eb06a.firebasestorage.app",
+    messagingSenderId: "232194306824",
+    appId: "1:232194306824:web:1d91b3e06a3b96ffc032bd"
 };
 ```
 

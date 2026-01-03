@@ -13,6 +13,15 @@ async function getUsers() {
     }
 }
 
+const firebaseConfig = {
+    apiKey: "AIzaSyCWX4AxKBPYhXzOxN68nFkqKVMq2x-MAGk",
+    authDomain: "pictorgram-eb06a.firebaseapp.com",
+    projectId: "pictorgram-eb06a",
+    storageBucket: "pictorgram-eb06a.firebasestorage.app",
+    messagingSenderId: "232194306824",
+    appId: "1:232194306824:web:1d91b3e06a3b96ffc032bd"
+};
+
 // Save/Update user in Firestore
 async function saveUser(user) {
     try {

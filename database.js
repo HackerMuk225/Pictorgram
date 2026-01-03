@@ -1,12 +1,24 @@
-// Firebase Configuration
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyDxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    authDomain: "pictorgram-xxxxx.firebaseapp.com",
-    projectId: "pictorgram-xxxxx",
-    storageBucket: "pictorgram-xxxxx.appspot.com",
-    messagingSenderId: "xxxxxxxxxxxx",
-    appId: "1:xxxxxxxxxxxx:web:xxxxxxxxxxxx"
+  apiKey: "AIzaSyCWX4AxKBPYhXzOxN68nFkqKVMq2x-MAGk",
+  authDomain: "pictorgram-eb06a.firebaseapp.com",
+  projectId: "pictorgram-eb06a",
+  storageBucket: "pictorgram-eb06a.firebasestorage.app",
+  messagingSenderId: "232194306824",
+  appId: "1:232194306824:web:1d91b3e06a3b96ffc032bd",
+  measurementId: "G-4XZNM7V0PM"
 };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
