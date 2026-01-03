@@ -175,6 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const currentUserId = getCurrentUserId();
+        const isOwnProfile = String(user.id) === String(currentUserId);
+
         function saveUpdatedUser(updatedUser) {
             const users = getUsers();
             const idx = users.findIndex(x => String(x.id) === String(updatedUser.id));
@@ -187,6 +190,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const img = document.createElement('img');
             img.src = user.profileImage || 'Logo.png';
             img.alt = 'profile';
+            img.style.width = '150px';
+            img.style.height = '150px';
+            img.style.borderRadius = '50%';
+            img.style.objectFit = 'cover';
 
             const name = document.createElement('h2');
             name.textContent = user.displayName || (user.firstName + ' ' + user.lastName);
@@ -197,64 +204,145 @@ document.addEventListener('DOMContentLoaded', () => {
             email.style.fontSize = '14px';
             email.style.marginBottom = '20px';
 
-            const uploadLabel = document.createElement('label');
-            uploadLabel.style.display = 'block';
-            uploadLabel.style.marginTop = '20px';
-            uploadLabel.style.marginBottom = '10px';
-            uploadLabel.style.fontSize = '14px';
-            uploadLabel.style.fontWeight = '600';
-            uploadLabel.textContent = 'Change Profile Picture';
-
-            const fileInput = document.createElement('input');
-            fileInput.type = 'file';
-            fileInput.accept = 'image/*';
-            fileInput.style.padding = '8px';
-            fileInput.addEventListener('change', (e) => {
-                const f = e.target.files[0];
-                if (!f) return;
-                const reader = new FileReader();
-                reader.onload = function(ev) {
-                    user.profileImage = ev.target.result;
-                    saveUpdatedUser(user);
-                    refreshView();
-                };
-                reader.readAsDataURL(f);
-            });
-
-            const nameLabel = document.createElement('label');
-            nameLabel.style.display = 'block';
-            nameLabel.style.marginTop = '20px';
-            nameLabel.style.marginBottom = '10px';
-            nameLabel.style.fontSize = '14px';
-            nameLabel.style.fontWeight = '600';
-            nameLabel.textContent = 'Edit Display Name';
-
-            const nameInput = document.createElement('input');
-            nameInput.type = 'text';
-            nameInput.value = user.displayName || '';
-            nameInput.placeholder = 'Enter your name';
-            
-            const saveName = document.createElement('button');
-            saveName.textContent = 'Save Name';
-            saveName.addEventListener('click', () => {
-                if (!nameInput.value.trim()) { alert('Name cannot be empty'); return; }
-                user.displayName = nameInput.value.trim();
-                saveUpdatedUser(user);
-                refreshView();
-            });
-
-            const back = document.createElement('button');
-            back.textContent = 'Back to Accounts';
-            back.addEventListener('click', () => { window.location.href = 'accounts.html'; });
-
             profileContainer.appendChild(img);
             profileContainer.appendChild(name);
             profileContainer.appendChild(email);
-            profileContainer.appendChild(uploadLabel);
-            profileContainer.appendChild(fileInput);
-            profileContainer.appendChild(nameLabel);
-            profileContainer.appendChild(nameInput);
-            profileContainer.appendChild(saveName);
+
+            // If viewing own profile, show edit options
+            if (isOwnProfile) {
+                const uploadLabel = document.createElement('label');
+                uploadLabel.style.display = 'block';
+                uploadLabel.style.marginTop = '20px';
+                uploadLabel.style.marginBottom = '10px';
+                uploadLabel.style.fontSize = '14px';
+                uploadLabel.style.fontWeight = '600';
+                uploadLabel.textContent = 'Change Profile Picture';
+
+                const fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.accept = 'image/*';
+                fileInput.style.padding = '8px';
+                fileInput.addEventListener('change', (e) => {
+                    const f = e.target.files[0];
+                    if (!f) return;
+                    const reader = new FileReader();
+                    reader.onload = function(ev) {
+                        user.profileImage = ev.target.result;
+                        saveUpdatedUser(user);
+                        refreshView();
+                    };
+                    reader.readAsDataURL(f);
+                });
+
+                const nameLabel = document.createElement('label');
+                nameLabel.style.display = 'block';
+                nameLabel.style.marginTop = '20px';
+                nameLabel.style.marginBottom = '10px';
+                nameLabel.style.fontSize = '14px';
+                nameLabel.style.fontWeight = '600';
+                nameLabel.textContent = 'Edit Display Name';
+
+                const nameInput = document.createElement('input');
+                nameInput.type = 'text';
+                nameInput.value = user.displayName || '';
+                nameInput.placeholder = 'Enter your name';
+                
+                const saveName = document.createElement('button');
+                saveName.textContent = 'Save Name';
+                saveName.addEventListener('click', () => {
+                    if (!nameInput.value.trim()) { alert('Name cannot be empty'); return; }
+                    user.displayName = nameInput.value.trim();
+                    saveUpdatedUser(user);
+                    refreshView();
+                });
+
+                profileContainer.appendChild(uploadLabel);
+                profileContainer.appendChild(fileInput);
+                profileContainer.appendChild(nameLabel);
+                profileContainer.appendChild(nameInput);
+                profileContainer.appendChild(saveName);
+            }
+
+            // Show all other users section
+            const allUsers = getUsers();
+            const otherUsers = allUsers.filter(u => String(u.id) !== String(userId));
+            
+            if (otherUsers.length > 0) {
+                const othersTitle = document.createElement('h3');
+                othersTitle.textContent = 'Other Users';
+                othersTitle.style.marginTop = '40px';
+                othersTitle.style.borderTop = '1px solid #ddd';
+                othersTitle.style.paddingTop = '20px';
+                profileContainer.appendChild(othersTitle);
+
+                const usersGrid = document.createElement('div');
+                usersGrid.style.display = 'grid';
+                usersGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(150px, 1fr))';
+                usersGrid.style.gap = '20px';
+                usersGrid.style.marginTop = '20px';
+
+                otherUsers.forEach(otherUser => {
+                    const userCard = document.createElement('div');
+                    userCard.style.border = '1px solid #ddd';
+                    userCard.style.borderRadius = '8px';
+                    userCard.style.padding = '15px';
+                    userCard.style.textAlign = 'center';
+                    userCard.style.cursor = 'pointer';
+                    userCard.style.transition = 'transform 0.2s, box-shadow 0.2s';
+                    userCard.addEventListener('mouseenter', () => {
+                        userCard.style.transform = 'scale(1.05)';
+                        userCard.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                    });
+                    userCard.addEventListener('mouseleave', () => {
+                        userCard.style.transform = 'scale(1)';
+                        userCard.style.boxShadow = 'none';
+                    });
+
+                    const userImg = document.createElement('img');
+                    userImg.src = otherUser.profileImage || 'Logo.png';
+                    userImg.alt = otherUser.displayName;
+                    userImg.style.width = '100px';
+                    userImg.style.height = '100px';
+                    userImg.style.borderRadius = '50%';
+                    userImg.style.objectFit = 'cover';
+                    userImg.style.marginBottom = '10px';
+
+                    const userName = document.createElement('div');
+                    userName.textContent = otherUser.displayName || (otherUser.firstName + ' ' + otherUser.lastName);
+                    userName.style.fontWeight = '600';
+                    userName.style.fontSize = '14px';
+                    userName.style.marginBottom = '8px';
+                    userName.style.overflow = 'hidden';
+                    userName.style.textOverflow = 'ellipsis';
+                    userName.style.whiteSpace = 'nowrap';
+
+                    const viewBtn = document.createElement('button');
+                    viewBtn.textContent = 'View Profile';
+                    viewBtn.style.width = '100%';
+                    viewBtn.style.marginTop = '10px';
+                    viewBtn.style.padding = '8px';
+                    viewBtn.style.backgroundColor = '#002a4d';
+                    viewBtn.style.color = 'white';
+                    viewBtn.style.border = 'none';
+                    viewBtn.style.borderRadius = '4px';
+                    viewBtn.style.cursor = 'pointer';
+                    viewBtn.addEventListener('click', () => {
+                        window.location.href = `profile.html?userId=${otherUser.id}`;
+                    });
+
+                    userCard.appendChild(userImg);
+                    userCard.appendChild(userName);
+                    userCard.appendChild(viewBtn);
+                    usersGrid.appendChild(userCard);
+                });
+
+                profileContainer.appendChild(usersGrid);
+            }
+
+            const back = document.createElement('button');
+            back.textContent = 'Back to Accounts';
+            back.style.marginTop = '30px';
+            back.addEventListener('click', () => { window.location.href = 'accounts.html'; });
             profileContainer.appendChild(back);
         }
 
